@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { User } = require("../model/Users");
 const { Child } = require("../model/Child");
-const ApiError = require("../utils/apierro");
+const ApiError = require("../utils/apiErro")
 
 /**-----------------------------------------------
  * @desc    Get Users

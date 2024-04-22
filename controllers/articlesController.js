@@ -1,6 +1,6 @@
 const { Articles } = require("../model/articles")
 const asyncHandler = require("express-async-handler");
-const ApiError = require("../utils/apierro");
+const ApiError = require("../utils/apiErro")
 
 
 /** insert all questinos */

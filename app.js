@@ -1,7 +1,7 @@
 const express = require("express");
 const globalError = require("./middlewares/erroMiddlewares")
 const connectodb = require("./config/connectToDB")
-const ApiError = require("./utils/apierro");
+const ApiError = require("./utils/apiErro")
 const xss =  require("xss-clean")
 const cors = require("cors")
 

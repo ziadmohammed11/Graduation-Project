@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler")
-const ApiError = require("../utils/apierro")
+const ApiError = require("../utils/apiErro")
 const { Child } = require("../model/Child")
 
 

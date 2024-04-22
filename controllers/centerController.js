@@ -1,6 +1,6 @@
 const { Center } = require("../model/centers")
 const asyncHandler = require("express-async-handler")
-const ApiError = require('../utils/apiErro')
+const ApiError = require("../utils/apiErro")
 
 
 module.exports.createCenter = asyncHandler(async(req,res, next) => {

@@ -40,10 +40,22 @@ const UserSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    /*child:{
+        type:mongoose.Schema.ObjectId,
+        ref: 'Child',
+    }*/
 
 },{
     timestamps:true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true}
 })
+
+UserSchema.virtual("childs", {
+    ref: "Child",
+    foreignField: "user",
+    localField: "_id",
+});
 
 
 // Generate Auth Token
@@ -51,11 +63,21 @@ UserSchema.methods.generateAuthToken = function() {
     return jwt.sign({id: this._id, isAdmin: this.isAdmin}, process.env.JWT_SECRET);
 }
 
+/*UserSchema.pre(/^find/, function (next) {
+    this.populate({
+      path: 'child',
+      select: 'name birthday',
+    }).populate({
+      path: 'cartItems.product',
+      select: 'title imageCover ',
+    });
+  
+    next();
+  });*/
+
 
 // User Model
 const User = mongoose.model("User", UserSchema);
-
-
 module.exports= {
     User,
 }

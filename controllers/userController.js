@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
-const ApiError = require("../utils/apiErro")
 const { User } = require("../model/Users");
+const { Child } = require("../model/Child");
+const ApiError = require("../utils/apierro");
 
 /**-----------------------------------------------
  * @desc    Get Users
@@ -12,6 +13,7 @@ module.exports.getAllUsers = asyncHandler(async(req,res) =>{
     
     const users = await User.find()
     res.status(201).json({message:users});
+    // console.log(Child)
 })
 
 
@@ -23,7 +25,10 @@ module.exports.getAllUsers = asyncHandler(async(req,res) =>{
 ------------------------------------------------*/
 module.exports.getUser = asyncHandler(async(req,res,next) => {
     const {id} = req.params;
-    const user = await User.findById(id)
+    const user = await User.findById(id).select("-password").populate({
+        path:"childs",
+        select:"name birthday -user"
+    })
     if(!user){
         return next(new ApiError(`No user for this id (${id})`, 404))
     

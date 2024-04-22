@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const {User , generateAuthToken} = require("../model/Users");
-const ApiError = require('../utils/apiErro')
+const ApiError = require("../utils/apierro");
 
 
 /**-----------------------------------------------

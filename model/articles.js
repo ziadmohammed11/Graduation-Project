@@ -1,14 +1,9 @@
 const mongoose = require("mongoose");
 
-const questionModel = new mongoose.Schema({
+const articlesModel = new mongoose.Schema({
     question:{
         type : String,
         require: [true , 'question is require'],
-        unique: true,
-    },
-    image: String,
-    choices: {
-        type: Array,
     },
     answer:{
         type : String,
@@ -17,9 +12,8 @@ const questionModel = new mongoose.Schema({
     timestamps:true,
 })
 
-const Question = mongoose.model("Question" , questionModel)
+const Articles = mongoose.model("Articles" , articlesModel)
 
 module.exports={
-    Question,
+    Articles,
 }
-

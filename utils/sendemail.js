@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+/*const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
     // 1) Create transporter ( service that will send email like "gmail","Mailgun", "mialtrap", sendGrid)
@@ -24,4 +24,4 @@ const sendEmail = async (options) => {
     await transporter.sendMail(mailOpts);
   };
   
-  module.exports = sendEmail;
+  module.exports = sendEmail;*/

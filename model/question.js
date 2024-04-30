@@ -6,7 +6,13 @@ const questionModel = new mongoose.Schema({
         require: [true , 'question is require'],
         unique: true,
     },
-    image: String,
+    image: {
+        type: Object,
+        default: {
+          url: "",
+          publicId: null,
+       },
+    },
     choices: {
         type: Array,
     },

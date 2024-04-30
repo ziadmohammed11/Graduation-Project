@@ -1,24 +1,39 @@
 const { Question } = require("../model/question")
+const fs = require("fs");
 const asyncHandler = require("express-async-handler");
 const ApiError = require("../utils/apiErro")
+const {cloudinaryUploadImage , cloudinaryRemoveImage} = require("../utils/cloudinary")
+const path = require("path")
 
 /** insert all questinos */
-module.exports.postquestionCtrl = asyncHandler(async(req,res) =>{
-    const {error} = (req.body);
-    if(error){
-        return res.status(400).json({message: error.details[0].message});
+module.exports.postquestionCtrl = asyncHandler(async(req,res) => {
+  //1- validation for image 
+  if(!req.file){
+    return res.status(400).json({message:'you should have image'})
+  }
+  // 2- upload image 
+  const imagePaht = path.join(__dirname,`../uploads/${req.file.filename}`)//
+  const result = await cloudinaryUploadImage(imagePaht)
+
+  const {error} = (req.body);
+  if(error){
+      return res.status(400).json({message: error.details[0].message});
+  }
+  // 3- creat querstion 
+  const question = await Question.create({
+    question: req.body.question,
+    choices: req.body.choices,
+    answer: req.body.answer,
+    image:{
+      url: result.secure_url,
+      publicId: result.public_id,
     }
-    questions = new Question({
-      question: req.body.question,
-      choices: req.body.choices,
-      answer: req.body.answer,
-      image: req.body.image
-    });
-     await questions.save();
-     res.status(201).json({message:"you question successfull"});
+  })
+  // 4- send res to client 
+  res.status(201).json({message:"you question successfull"})
+  // 5- delete the image form the server
+  fs.unlinkSync(imagePaht);
 })
-
-
 module.exports.getAllQuestionCtrl = asyncHandler(async(req,res,next) =>{
   let questions = await Question.find();
   if(!questions){

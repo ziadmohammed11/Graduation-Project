@@ -76,7 +76,7 @@ module.exports.getUserAndDelete = asyncHandler(async(req,res,next) => {
  * @route   /api/users/uploadprofile
  * @method  put
  * @access  public
-------------------------------------------------*/
+------------------------------------------------*///
 module.exports.profilePohtoUpload = asyncHandler(async(req,res,next) => {
     if(!req.file){
         return res.status(400).json({message: "no file provided"})

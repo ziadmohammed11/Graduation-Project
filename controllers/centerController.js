@@ -45,8 +45,8 @@ module.exports.deleteCenter = asyncHandler(async (req, res, next) => {
     res.status(200).json({});
 });
 
-
+//
 module.exports.getAllCenter = asyncHandler(async(req,res,next) =>{
   const center = await Center.find();
-  res.status(200).json(center)
+  res.status(200).json({message:center})
 })

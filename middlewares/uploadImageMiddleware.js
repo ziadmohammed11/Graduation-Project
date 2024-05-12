@@ -1,9 +1,12 @@
 const multer = require('multer');
 const path = require("path")
-const { v4: uuidv4 } = require('uuid');
+//const { v4: uuidv4 } = require('uuid');
 
 // photo storge 
-const PhotoStorge = multer.diskStorage({
+module.exports = multer({
+  storage:multer.diskStorage({}),
+})
+/*const PhotoStorge = multer.diskStorage({
   destination: function(req,file,cb){
     cb(null, path.join(__dirname,"../uploads"))
   },
@@ -14,9 +17,9 @@ const PhotoStorge = multer.diskStorage({
       cb(null,false);
     }
   }
-})
+})*/
 // photo upload middlewares
-const uploadPhoto = multer({
+/*const uploadPhoto = multer({
   storage: PhotoStorge,
   fileFilter: function(req,file,cb){
     if(file.mimetype.startsWith("image")){
@@ -28,7 +31,7 @@ const uploadPhoto = multer({
   limits: {fieldSize: 1024 * 1024}
 })
 
-module.exports = uploadPhoto
+module.exports = uploadPhoto*/
 /******************************************************************************************* */
 
 

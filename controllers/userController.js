@@ -68,8 +68,8 @@ module.exports.getUserAndDelete = asyncHandler(async(req,res,next) => {
         return next(new ApiError(`No user for this id (${id})`, 404))
     
     }
-   // user.remove()
-    res.status(204).json({message: done }) 
+  // user.remove()
+    res.status(204).json({message:"user is deleted"}) 
 })
 /**-----------------------------------------------
  * @desc    upload profilephoto User

@@ -12,8 +12,10 @@ module.exports.postquestionCtrl = asyncHandler(async(req,res) => {
     return res.status(400).json({message:'you should have image'})
   }
   // 2- upload image 
-  const imagePaht = path.join(__dirname,`../uploads/${req.file.filename}`)//
-  const result = await cloudinaryUploadImage(imagePaht)
+  //const imagePaht =  path.join(__dirname,`../uploads/${req.file.filename}`)
+  const result = await cloudinaryUploadImage(req.file.path)
+
+  //console.log(imagePaht)
 
   const {error} = (req.body);
   if(error){

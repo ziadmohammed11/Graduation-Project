@@ -76,15 +76,15 @@ module.exports.getUserAndDelete = asyncHandler(async(req,res,next) => {
  * @route   /api/users/uploadprofile
  * @method  put
  * @access  public
-------------------------------------------------*///
+------------------------------------------------*/
 module.exports.profilePohtoUpload = asyncHandler(async(req,res,next) => {
     if(!req.file){
         return res.status(400).json({message: "no file provided"})
     }
     // 2. Get the path to the image
-    const imagePath = path.join(__dirname, `../uploads/${req.file.filename}`)
+    //const imagePath = path.join(__dirname, `../uploads/${req.file.filename}`)
     // 3. Upload to cloudinary
-    const resolt = await cloudinaryUploadImage(imagePath)
+    const resolt = await cloudinaryUploadImage(req.file.path)
     // 4. Get the user from DB
     const user = await User.findById(req.user.id)
     // 5. Delete the old profile photo if exist
@@ -101,5 +101,5 @@ module.exports.profilePohtoUpload = asyncHandler(async(req,res,next) => {
    res.status(200).json({message:"your profile photo uploaded" , 
    profilePhoto:{url:resolt.secure_url , publicId: resolt.public_id}})
    // 8. Remvoe image from the server
-   fs.unlinkSync(imagePath)
+   //fs.unlinkSync(imagePath)
 })

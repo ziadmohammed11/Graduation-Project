@@ -41,5 +41,5 @@ module.exports.getChild = asyncHandler(async (req, res, next) => {
 
 module.exports.getAllChild = asyncHandler(async(req,res,next) =>{
   const child = await Child.find();
-  res.status(200).json(child)
+  res.status(200).json({child})
 })

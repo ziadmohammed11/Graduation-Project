@@ -7,6 +7,13 @@ const articlesModel = new mongoose.Schema({
     },
     answer:{
         type : String,
+    },
+    image: {
+        type: Object,
+        default: {
+          url: "",
+          publicId: null,
+       },
     }
 },{
     timestamps:true,

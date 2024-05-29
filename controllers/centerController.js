@@ -1,15 +1,32 @@
 const { Center } = require("../model/centers")
 const asyncHandler = require("express-async-handler")
 const ApiError = require("../utils/apiErro")
+const { cloudinaryUploadImage } = require("../utils/cloudinary")
+const path = require("path")
 
 
 module.exports.createCenter = asyncHandler(async(req,res, next) => {
-    let center = await Center.findOne({name: req.body.name})
-    if(center){
-        return next(new ApiError(`massege: this is center already exist` , 400))
+  if(!req.file) return res.status(400).json({message:'you should have image'})
+  const result = await cloudinaryUploadImage(req.file.path)
+  const {error} = (req.body);
+  if(error){
+      return res.status(400).json({message: error.details[0].message});
+  }
+
+  let center = await Center.findOne({name: req.body.name})
+  if(center){
+      return next(new ApiError(`massege: this is center already exist` , 400))
     }
-    center = await Center.create(req.body);
-    res.status(201).json({data: center})
+  center = await Center.create({
+    name:req.body.name,
+    addresse: req.body.addresse,
+    phone: req.body.phone,
+    image:{
+      url: result.secure_url,
+      publicId: result.public_id,
+    }
+  });
+  res.status(201).json({data: center})
 })
 
 module.exports.updateCenter = asyncHandler(async (req, res, next) => {

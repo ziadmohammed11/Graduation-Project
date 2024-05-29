@@ -10,6 +10,13 @@ const centersModel = new mongoose.Schema({
     addresse:{
         type: String
     },
+    image: {
+        type: Object,
+        default: {
+          url: "",
+          publicId: null,
+       },
+    },
     phone: Number,
 },{
     timestamps:true

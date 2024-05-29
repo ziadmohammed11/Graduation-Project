@@ -1,10 +1,14 @@
 const { Articles } = require("../model/articles")
 const asyncHandler = require("express-async-handler");
-const ApiError = require("../utils/apiErro")
+const ApiError = require("../utils/apiErro");
+const { cloudinaryUploadImage } = require("../utils/cloudinary");
+const path = require("path")
 
 
 /** insert all questinos */
 module.exports.postArticlesCtrl = asyncHandler(async(req,res) =>{
+    if (!req.file) return res.status(400).json({message:'you should have image'})
+    const result = await cloudinaryUploadImage(req.file.path)
     const {error} = (req.body);
     if(error){
         return res.status(400).json({message: error.details[0].message});
@@ -12,6 +16,10 @@ module.exports.postArticlesCtrl = asyncHandler(async(req,res) =>{
     articless = new Articles({
       question: req.body.question,
       answer: req.body.answer,
+      image:{
+      url: result.secure_url,
+      publicId: result.public_id,
+    }
     });
      await articless.save();
      res.status(201).json({message:"you Articles successfull"});

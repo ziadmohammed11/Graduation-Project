@@ -40,6 +40,11 @@ const UserSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    passwordChangedAt: Date,
+    passwordResetCode: String,
+    passwordResetExpires: Date,
+    passwordResetVerified: Boolean,
+
     /*child:{
         type:mongoose.Schema.ObjectId,
         ref: 'Child',

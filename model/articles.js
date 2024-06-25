@@ -7,6 +7,7 @@ const articlesModel = new mongoose.Schema({
     },
     answer:{
         type : String,
+        require: true,
     },
     image: {
         type: Object,

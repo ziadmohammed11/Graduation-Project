@@ -8,7 +8,8 @@ const centersModel = new mongoose.Schema({
        
     },
     addresse:{
-        type: String
+        type: String,
+        require: true
     },
     image: {
         type: Object,
@@ -17,7 +18,10 @@ const centersModel = new mongoose.Schema({
           publicId: null,
        },
     },
-    phone: Number,
+    phone:{
+        type: Number,
+        require: true
+    }
 },{
     timestamps:true
 })

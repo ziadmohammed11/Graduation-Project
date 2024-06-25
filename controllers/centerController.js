@@ -70,5 +70,5 @@ module.exports.getAllCenter = asyncHandler(async(req,res,next) =>{
     }
     
   })
-  res.status(200).json({message:updatecenter})
+  res.status(200).json({message:center})
 })

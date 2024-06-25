@@ -43,3 +43,9 @@ module.exports.getAllChild = asyncHandler(async(req,res,next) =>{
   const child = await Child.find();
   res.status(200).json({child})
 })
+
+
+module.exports.deleteAllChild = asyncHandler(async(req,res) => {
+    await Child.deleteMany();
+    res.status(201).json({message:"delete is done"})
+})

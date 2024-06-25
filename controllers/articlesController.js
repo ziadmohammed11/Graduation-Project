@@ -7,19 +7,15 @@ const path = require("path")
 
 /** insert all questinos */
 module.exports.postArticlesCtrl = asyncHandler(async(req,res) =>{
-    if (!req.file) return res.status(400).json({message:'you should have image'})
+    /*if (!req.file) return res.status(400).json({message:'you should have image'})
     const result = await cloudinaryUploadImage(req.file.path)
     const {error} = (req.body);
     if(error){
         return res.status(400).json({message: error.details[0].message});
-    }
+    }*/
     articless = new Articles({
       question: req.body.question,
       answer: req.body.answer,
-      image:{
-      url: result.secure_url,
-      publicId: result.public_id,
-    }
     });
      await articless.save();
      res.status(201).json({message:"you Articles successfull"});
@@ -27,7 +23,7 @@ module.exports.postArticlesCtrl = asyncHandler(async(req,res) =>{
 
 
 module.exports.getAllArticlesCtrl = asyncHandler(async(req,res,next) =>{
-  let articless = await Articles.find();
+  let articless = await Articles.find({},'question answer');
   if(!articless){
     return next(new ApiError(`massege: no articless` , 400))
   }

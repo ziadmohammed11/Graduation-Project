@@ -6,12 +6,12 @@ const path = require("path")
 
 
 module.exports.createCenter = asyncHandler(async(req,res, next) => {
-  if(!req.file) return res.status(400).json({message:'you should have image'})
+  /* if(!req.file) return res.status(400).json({message:'you should have image'})
   const result = await cloudinaryUploadImage(req.file.path)
   const {error} = (req.body);
   if(error){
       return res.status(400).json({message: error.details[0].message});
-  }
+  } */
 
   let center = await Center.findOne({name: req.body.name})
   if(center){
@@ -21,10 +21,6 @@ module.exports.createCenter = asyncHandler(async(req,res, next) => {
     name:req.body.name,
     addresse: req.body.addresse,
     phone: req.body.phone,
-    image:{
-      url: result.secure_url,
-      publicId: result.public_id,
-    }
   });
   res.status(201).json({data: center})
 })
@@ -64,6 +60,6 @@ module.exports.deleteCenter = asyncHandler(async (req, res, next) => {
 
 //
 module.exports.getAllCenter = asyncHandler(async(req,res,next) =>{
-  const center = await Center.find();
+  const center = await Center.find({},'name addresse phone');
   res.status(200).json({message:center})
 })

@@ -20,7 +20,7 @@ const centersModel = new mongoose.Schema({
        },
     },
     phone:{
-        type: String,
+        type: Number,
         require: true
     }
 },{

@@ -3,7 +3,7 @@ const {postArticlesCtrl , getAllArticlesCtrl ,getArticlesCtrl, updateArticlesCtr
 const {verifyTokenAndAdmin} = require("../middlewares/verifyToken")
 const uploadimage = require("../middlewares/uploadImageMiddleware")
 // /api/auth/
-router.get("/",verifyTokenAndAdmin, getAllArticlesCtrl)
+router.get("/", getAllArticlesCtrl)
 router.get("/:id",getArticlesCtrl)
 router.post("/", verifyTokenAndAdmin,uploadimage.single("image"),postArticlesCtrl);
 router.delete("/:id",verifyTokenAndAdmin, deleteArticlesCtrl)

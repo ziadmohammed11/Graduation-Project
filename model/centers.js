@@ -1,3 +1,4 @@
+const { string } = require("joi");
 const mongoose = require("mongoose")
 
 const centersModel = new mongoose.Schema({
@@ -19,7 +20,7 @@ const centersModel = new mongoose.Schema({
        },
     },
     phone:{
-        type: Number,
+        type: String,
         require: true
     }
 },{

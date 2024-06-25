@@ -60,6 +60,15 @@ module.exports.deleteCenter = asyncHandler(async (req, res, next) => {
 
 //
 module.exports.getAllCenter = asyncHandler(async(req,res,next) =>{
-  const center = await Center.find();
-  res.status(200).json({message:center})
+  const center = await Center.find({},'name addresse phone');
+  const updatecenter = center.map((cen) =>{
+    const phoneStr = String(cen.phone);
+    return {
+      name: cen.name,
+      addresse: cen.addresse,
+      phone: phoneStr.startsWith('0') ? phoneStr : '0' + phoneStr
+    }
+    
+  })
+  res.status(200).json({message:updatecenter})
 })

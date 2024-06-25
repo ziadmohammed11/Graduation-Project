@@ -23,7 +23,7 @@ module.exports.postArticlesCtrl = asyncHandler(async(req,res) =>{
 
 
 module.exports.getAllArticlesCtrl = asyncHandler(async(req,res,next) =>{
-  let articless = await Articles.find({},'question answer');
+  let articless = await Articles.find();
   if(!articless){
     return next(new ApiError(`massege: no articless` , 400))
   }
